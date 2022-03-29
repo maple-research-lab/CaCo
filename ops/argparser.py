@@ -94,7 +94,7 @@ def argparser():
     
     parser.add_argument('--warmup_epochs', default=0, type=int, metavar='N',
                     help='number of warmup epochs')
-    parser.add_argument("--multicrop",default=0,type=int,help="use multicrop or not")
+    parser.add_argument("--multi_crop",default=0,type=int,help="use multicrop or not")
 
     parser.add_argument("--nmb_crops", type=int, default=[1, 6], nargs="+",
                         help="list of number of crops (example: [1, 6])")  # when use 0 denotes the multi crop is not applied
