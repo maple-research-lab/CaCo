@@ -71,7 +71,7 @@ conda deactivate(If you want to exit)
 #### 1.1 Training with batch size of 1024 (Single Machine)
 For batch-size of 1024, we can run on a single machine of 8\*V100 32gb GPU with the following command:
 ```
-python3 main.py --type=0 --lr=0.3 --lr_final=0.003 --memory_lr=3.0 --memory_lr_final=3.0 --cluster=65536 --moco_t=0.08 --mem_t=0.08 --data=datasets/imagenet --dist_url=tcp://localhost:10001 --batch_size=1024 --wd=1.5e-6 --mem_wd=0 --moco_dim=256 --moco_m=0.99 --moco_m_decay=1 --mlp_dim=2048 --epochs=200 --warmup_epochs=10 --nodes_num=1 --workers=32 --world_size 1 --rank=0 --mem_momentum=0.9 --ad_init=1 --knn_batch_size=1024 --multicrop=0 --knn_freq=10
+python3 main.py --type=0 --lr=0.3 --lr_final=0.003 --memory_lr=3.0 --memory_lr_final=3.0 --cluster=65536 --moco_t=0.08 --mem_t=0.08 --data=datasets/imagenet --dist_url=tcp://localhost:10001 --batch_size=1024 --wd=1.5e-6 --mem_wd=0 --moco_dim=256 --moco_m=0.99 --moco_m_decay=1 --mlp_dim=2048 --epochs=200 --warmup_epochs=10 --nodes_num=1 --workers=32 --world_size 1 --rank=0 --mem_momentum=0.9 --ad_init=1 --knn_batch_size=1024 --multi_crop=0 --knn_freq=10
 ```
 This should be able to reproduce our 71.3% performance with batch size 1024.
 
@@ -79,11 +79,11 @@ This should be able to reproduce our 71.3% performance with batch size 1024.
 This can only run with multiple machines. Limited by our computing resources, we run experiments with 2048 on 4 8\*V100 GPU matchines
 On the first node machine, run the following command:
 ```
-python3 main.py --type=0 --lr=0.3 --lr_final=0.003 --memory_lr=3.0 --memory_lr_final=3.0 --cluster=65536 --moco_t=0.08 --mem_t=0.08 --data=datasets/imagenet --dist_url=tcp://localhost:10001 --batch_size=4096 --wd=1.5e-6 --mem_wd=0 --moco_dim=256 --moco_m=0.99 --moco_m_decay=1 --mlp_dim=2048 --epochs=200 --warmup_epochs=10 --nodes_num=1 --workers=32 --world_size 4 --rank=0 --mem_momentum=0.9 --ad_init=1 --knn_batch_size=1024 --multicrop=0 --knn_freq=20
+python3 main.py --type=0 --lr=0.3 --lr_final=0.003 --memory_lr=3.0 --memory_lr_final=3.0 --cluster=65536 --moco_t=0.08 --mem_t=0.08 --data=datasets/imagenet --dist_url=tcp://localhost:10001 --batch_size=4096 --wd=1.5e-6 --mem_wd=0 --moco_dim=256 --moco_m=0.99 --moco_m_decay=1 --mlp_dim=2048 --epochs=200 --warmup_epochs=10 --nodes_num=1 --workers=32 --world_size 4 --rank=0 --mem_momentum=0.9 --ad_init=1 --knn_batch_size=1024 --multi_crop=0 --knn_freq=20
 ```
 Then iteratively run on other nodes with the following command:
 ```
-python3 main.py --type=0 --lr=0.3 --lr_final=0.003 --memory_lr=3.0 --memory_lr_final=3.0 --cluster=65536 --moco_t=0.08 --mem_t=0.08 --data=datasets/imagenet --dist_url=tcp://[master_id]:10001 --batch_size=4096 --wd=1.5e-6 --mem_wd=0 --moco_dim=256 --moco_m=0.99 --moco_m_decay=1 --mlp_dim=2048 --epochs=200 --warmup_epochs=10 --nodes_num=1 --workers=32 --world_size 4 --rank=[rank_id] --mem_momentum=0.9 --ad_init=1 --knn_batch_size=1024 --multicrop=0 --knn_freq=20
+python3 main.py --type=0 --lr=0.3 --lr_final=0.003 --memory_lr=3.0 --memory_lr_final=3.0 --cluster=65536 --moco_t=0.08 --mem_t=0.08 --data=datasets/imagenet --dist_url=tcp://[master_id]:10001 --batch_size=4096 --wd=1.5e-6 --mem_wd=0 --moco_dim=256 --moco_m=0.99 --moco_m_decay=1 --mlp_dim=2048 --epochs=200 --warmup_epochs=10 --nodes_num=1 --workers=32 --world_size 4 --rank=[rank_id] --mem_momentum=0.9 --ad_init=1 --knn_batch_size=1024 --multi_crop=0 --knn_freq=20
 ```
 Here we should change [master_ip] to the IP of the 1st node, also we should adjust rank with 1, 2, and 3 for 3 different nodes.
 
@@ -92,11 +92,11 @@ Here we should change [master_ip] to the IP of the 1st node, also we should adju
 This can only be run with multiple machines. Limited by our computing resources, we run experiments with 2048 on 4 8\*V100 GPU matchines
 On the first node machine, run the following command:
 ```
-python3 main.py --type=0 --lr=0.3 --lr_final=0.003 --memory_lr=3.0 --memory_lr_final=3.0 --cluster=65536 --moco_t=0.08 --mem_t=0.08 --data=datasets/imagenet --dist_url=tcp://localhost:10001 --batch_size=2048 --wd=1.5e-6 --mem_wd=0 --moco_dim=256 --moco_m=0.99 --moco_m_decay=1 --mlp_dim=2048 --epochs=800 --warmup_epochs=10 --nodes_num=4 --workers=128 --world_size 4 --rank=0 --mem_momentum=0.9 --ad_init=1 --knn_batch_size=2048 --multicrop=1 --knn_freq=50
+python3 main.py --type=0 --lr=0.3 --lr_final=0.003 --memory_lr=3.0 --memory_lr_final=3.0 --cluster=65536 --moco_t=0.08 --mem_t=0.08 --data=datasets/imagenet --dist_url=tcp://localhost:10001 --batch_size=2048 --wd=1.5e-6 --mem_wd=0 --moco_dim=256 --moco_m=0.99 --moco_m_decay=1 --mlp_dim=2048 --epochs=800 --warmup_epochs=10 --nodes_num=4 --workers=128 --world_size 4 --rank=0 --mem_momentum=0.9 --ad_init=1 --knn_batch_size=2048 --multi_crop=1 --knn_freq=50
 ```
 Then iteratively run on other nodes with the following command:
 ```
-python3 main.py --type=0 --lr=0.3 --lr_final=0.003 --memory_lr=3.0 --memory_lr_final=3.0 --cluster=65536 --moco_t=0.08 --mem_t=0.08 --data=datasets/imagenet --dist_url=tcp://[master_id]:10001 --batch_size=2048 --wd=1.5e-6 --mem_wd=0 --moco_dim=256 --moco_m=0.99 --moco_m_decay=1 --mlp_dim=2048 --epochs=800 --warmup_epochs=10 --nodes_num=4 --workers=128 --world_size 4 --rank=[rank_id] --mem_momentum=0.9 --ad_init=1 --knn_batch_size=2048 --multicrop=1 --knn_freq=50
+python3 main.py --type=0 --lr=0.3 --lr_final=0.003 --memory_lr=3.0 --memory_lr_final=3.0 --cluster=65536 --moco_t=0.08 --mem_t=0.08 --data=datasets/imagenet --dist_url=tcp://[master_id]:10001 --batch_size=2048 --wd=1.5e-6 --mem_wd=0 --moco_dim=256 --moco_m=0.99 --moco_m_decay=1 --mlp_dim=2048 --epochs=800 --warmup_epochs=10 --nodes_num=4 --workers=128 --world_size 4 --rank=[rank_id] --mem_momentum=0.9 --ad_init=1 --knn_batch_size=2048 --multi_crop=1 --knn_freq=50
 ```
 Here we should change [master_ip] to the IP of the 1st node, also we should adjust rank with 1, 2, and 3 for 3 different nodes.<br>
 We believe further increase the batch size to 4096 can increase the performance.
