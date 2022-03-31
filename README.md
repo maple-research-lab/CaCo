@@ -16,6 +16,10 @@ License: MIT for academic use.
 
 Contact: Xiao Wang (wang3702@purdue.edu), Guo-Jun Qi (guojunq@gmail.com)
 
+<p align="center">
+  <img src="https://github.com/maple-research-lab/CaCo/blob/main/caco_diagram.png" width="300">
+</p>
+
 ## Introduction
 
 As a representative self-supervised method, contrastive learning has achieved great successes in unsupervised training of representations. It trains an encoder by distinguishing positive samples from negative ones given query anchors. These positive and negative samples play critical roles in defining the objective to learn the discriminative encoder, avoiding it from learning trivial features. While existing methods heuristically choose these samples, we present a principled method where both positive and negative samples are directly learnable end-to-end with the encoder. We show that the positive and negative samples can be cooperatively and adversarially learned by minimizing and maximizing the contrastive loss, respectively. This yields cooperative positives and adversarial negatives with respect to the encoder, which are updated to continuously track the learned representation of the query anchors over mini-batches. The proposed method achieves 72.0% and 75.3% in top-1 accuracy respectively over 200 and 800 epochs of pre-training ResNet-50 backbone on ImageNet1K without tricks such as multi-crop or stronger augmentations. With Multi-Crop, it can be further boosted into 75.7%.
