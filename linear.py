@@ -170,6 +170,13 @@ def main_worker(gpu, ngpus_per_node, args):
                     # remove prefix
                     state_dict[k[len("module.encoder_q."):]] = state_dict[k]
                     del state_dict[k]
+            args.start_epoch = 0
+            msg = model.load_state_dict(state_dict, strict=False)
+            assert set(msg.missing_keys) == {"%s.weight" % linear_keyword, "%s.bias" % linear_keyword}
+
+            print("=> loaded pre-trained model '{}'".format(args.pretrained))
+        else:
+            print("=> no checkpoint found at '{}'".format(args.pretrained))  
 
 
 
@@ -209,15 +216,20 @@ def main_worker(gpu, ngpus_per_node, args):
     criterion = nn.CrossEntropyLoss().cuda(args.gpu)
     args.pretrained = os.path.abspath(args.pretrained)
     save_dir = os.path.split(args.pretrained)[0]
-    mkdir(save_dir)
+    if args.rank==0:
+        mkdir(save_dir)
     save_dir = os.path.join(save_dir, "linear_lars")
-    mkdir(save_dir)
+    if args.rank==0:
+        mkdir(save_dir)
     save_dir = os.path.join(save_dir, "bs_%d" % args.batch_size)
-    mkdir(save_dir)
+    if args.rank==0:
+        mkdir(save_dir)
     save_dir = os.path.join(save_dir, "lr_%.3f" % args.lr)
-    mkdir(save_dir)
+    if args.rank==0:
+        mkdir(save_dir)
     save_dir = os.path.join(save_dir, "wd_" + str(args.weight_decay))
-    mkdir(save_dir)
+    if args.rank==0:
+        mkdir(save_dir)
     # optimize only the linear classifier
     parameters = list(filter(lambda p: p.requires_grad, model.parameters()))
     assert len(parameters) == 2  # fc.weight, fc.bias
