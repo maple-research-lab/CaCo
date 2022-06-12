@@ -158,7 +158,7 @@ python linear.py  -a resnet50 --lr 0.025 --batch-size 4096 \
 
 
 ## Citation:
-[CaCo: Both Positive and Negative Samples are Directly Learnable via Cooperative-adversarial Contrastive Learning ]().  
+[CaCo: Both Positive and Negative Samples are Directly Learnable via Cooperative-adversarial Contrastive Learning](https://arxiv.org/abs/2203.14370).  
 ```
 @article{wang2022caco,
   title={CaCo: Both Positive and Negative Samples are Directly Learnable via Cooperative-adversarial Contrastive Learning },
