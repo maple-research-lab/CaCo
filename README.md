@@ -10,7 +10,7 @@
 
 CaCo is a contrastive-learning based self-supervised learning methods, which is submitted to IEEE-T-PAMI.
 
-Copyright (C) 2020 Xiao Wang, Yuhang Huang, Dan Zeng, Guo-Jun Qi
+Copyright (C) 2022 Xiao Wang, Yuhang Huang, Dan Zeng, Guo-Jun Qi
 
 License: MIT for academic use.
 
