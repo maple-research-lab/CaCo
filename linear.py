@@ -155,7 +155,7 @@ def main_worker(gpu, ngpus_per_node, args):
     # init the fc layer
     model.fc.weight.data.normal_(mean=0.0, std=0.01)
     model.fc.bias.data.zero_()
-
+    linear_keyword="fc"
     # load from pre-trained, before DistributedDataParallel constructor
     if args.pretrained:
         if os.path.isfile(args.pretrained):
