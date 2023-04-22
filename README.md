@@ -163,8 +163,8 @@ python linear.py  -a resnet50 --lr 0.025 --batch-size 4096 \
 @article{wang2022caco,
   title={CaCo: Both Positive and Negative Samples are Directly Learnable via Cooperative-adversarial Contrastive Learning },
   author={Wang, Xiao and Huang, Yuhang and Zeng, Dan and Qi, Guo-Jun},
-  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence (submitted)},
-  year={2022}
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  year={2023}
 }
 ```
 
