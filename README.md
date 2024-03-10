@@ -8,7 +8,7 @@
    <img src="https://img.shields.io/badge/licence-MIT-green">
 </a>   
 
-CaCo is a contrastive-learning based self-supervised learning methods, which is submitted to IEEE-T-PAMI.
+CaCo is a contrastive-learning based self-supervised learning methods, which is published in IEEE-T-PAMI.
 
 Copyright (C) 2022 Xiao Wang, Yuhang Huang, Dan Zeng, Guo-Jun Qi
 
@@ -159,6 +159,7 @@ python linear.py  -a resnet50 --lr 0.025 --batch-size 4096 \
 
 ## Citation:
 [CaCo: Both Positive and Negative Samples are Directly Learnable via Cooperative-adversarial Contrastive Learning](https://arxiv.org/abs/2203.14370).  
+[CaCo: Both Positive and Negative Samples are Directly Learnable via Cooperative-adversarial Contrastive Learning](https://doi.org/10.1109/TPAMI.2023.3262608). 
 ```
 @article{wang2022caco,
   title={CaCo: Both Positive and Negative Samples are Directly Learnable via Cooperative-adversarial Contrastive Learning },
